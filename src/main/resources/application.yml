@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://103.226.249.174:5432/quiz_system
-    username: postgres
-    password: postgres
+    url: postgres://ht_trac_nghiem_user:qijtuPSN2HNvvjLVUFlvYFnV6bS13eqd@dpg-cpen945ds78s73fj7g5g-a.oregon-postgres.render.com/ht_trac_nghiem
+    username: ht_trac_nghiem_user
+    password: qijtuPSN2HNvvjLVUFlvYFnV6bS13eqd
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
