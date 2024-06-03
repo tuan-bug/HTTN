@@ -16,7 +16,7 @@ file:
   upload-dir: D:\UploadImageSpring\
 cors:
   allowed:
-    origins: http://localhost:3000/, http://127.0.0.1:3000/
+    origins: http://localhost:3000/, http://127.0.0.1:3000/, http://localhost:5432/
   max:
     age: 3600
 jwt:
