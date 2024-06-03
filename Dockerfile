@@ -1,7 +1,8 @@
 FROM openjdk:17
 RUN groupadd -r app && useradd -r -g app app
 USER app
-COPY target/be-0.0.1-SNAPSHOT.jar app.jar
+#COPY target/be-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /target/be-0.0.1-SNAPSHOT.jar be.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app.jar"]
 
