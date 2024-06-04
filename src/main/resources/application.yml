@@ -2,9 +2,9 @@ spring:
   application:
     name: data
   datasource:
-    url: jdbc:postgresql://dpg-cpen945ds78s73fj7g5g-a.oregon-postgres.render.com:5432/ht_trac_nghiem
-    username: ht_trac_nghiem_user
-    password: qijtuPSN2HNvvjLVUFlvYFnV6bS13eqd
+    url: jdbc:postgresql://localhost:5432/ht_trac_nghiem
+    username: postgres
+    password: 123456
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:
