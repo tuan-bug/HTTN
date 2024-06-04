@@ -36,12 +36,34 @@
 #COPY --from=build /app/target/*.jar /app/app.jar
 #EXPOSE 8080
 #ENTRYPOINT ["java","-jar","app.jar"]
-FROM maven:3.8.3-openjdk-17-slim AS build
+#FROM maven:3.8.3-openjdk-17-slim AS build
+#WORKDIR /app
+#COPY . /app/
+#RUN mvn clean package -DskipTests
+#
+#FROM openjdk:17.0.1-jdk-slim
+#WORKDIR /app
+#COPY --from=build /app/target/*.jar /app/app.jar
+#ENTRYPOINT ["java","-jar","/app/app.jar"]
+# Importing JDK and copying required files
+FROM openjdk:17-jdk AS build
 WORKDIR /app
-COPY . /app/
-RUN mvn clean package -DskipTests
+COPY pom.xml .
+COPY src src
 
-FROM openjdk:17.0.1-jdk-slim
-WORKDIR /app
-COPY --from=build /app/target/*.jar /app/app.jar
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+# Copy Maven wrapper
+COPY mvnw .
+COPY .mvn .mvn
+
+# Set execution permission for the Maven wrapper
+RUN chmod +x ./mvnw
+RUN ./mvnw clean package -DskipTests
+
+# Stage 2: Create the final Docker image using OpenJDK 19
+FROM openjdk:17-jdk
+VOLUME /tmp
+
+# Copy the JAR from the build stage
+COPY --from=build /app/target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+EXPOSE 8080
