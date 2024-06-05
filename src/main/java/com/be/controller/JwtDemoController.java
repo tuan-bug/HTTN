@@ -80,6 +80,23 @@ public class JwtDemoController {
                 roleRepository.save(role);
             }
         }
+        // Kiểm tra nếu cơ sở dữ liệu người dùng trống
+        if (userRepository.count() == 0) {
+            Users defaultAdmin = new Users();
+            String newGuid = UUID.randomUUID().toString();
+            defaultAdmin.setId(newGuid);
+            defaultAdmin.setFullName("Admin");
+            defaultAdmin.setEmail("admin@example.com");
+            defaultAdmin.setUsername("admin");
+            defaultAdmin.setStatus(true);
+            defaultAdmin.setPassword(encoder.encode("admin")); // Mật khẩu mặc định
+            defaultAdmin.setDateCreated(new Date());
+            defaultAdmin.setDateUpdated(new Date());
+            defaultAdmin.setRoles(roleRepository.findByName(RoleConstant.ROLE_ADMIN));
+            userRepository.save(defaultAdmin);
+        }
+
+        // Tạo người dùng mới
         Users user = new Users();
         String newGuid = UUID.randomUUID().toString();
         user.setId(newGuid);
@@ -91,6 +108,7 @@ public class JwtDemoController {
         user.setDateUpdated(new Date());
         user.setRoles(roleRepository.findByName(RoleConstant.ROLE_USER));
         userRepository.save(user);
+
         return new ResponseEntity<>("Created Successfully", HttpStatus.CREATED);
     }
 
