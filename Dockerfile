@@ -46,6 +46,8 @@
 #COPY --from=build /app/target/*.jar /app/app.jar
 #ENTRYPOINT ["java","-jar","/app/app.jar"]
 #
+
+
 #FROM openjdk:17-jdk AS build
 #WORKDIR /app
 #COPY pom.xml .
@@ -67,11 +69,13 @@
 #COPY --from=build /app/target/*.jar app.jar
 #ENTRYPOINT ["java","-jar","/app.jar"]
 #EXPOSE 8080
-
+#
 #FROM eclipse-temurin:17-jdk-alpine
 #VOLUME /tmp
 #COPY target/*.jar app.jar
 #ENTRYPOINT ["java","-jar","/app.jar"]
+
+
 
 #FROM ubuntu:latest AS build
 #
@@ -87,6 +91,9 @@
 #COPY --from=build /target/be-0.0.1-SNAPSHOT.jar app.jar
 #
 #ENTRYPOINT ["java", "-jar", "app.jar"]
+
+
+
 
 FROM ubuntu:latest AS build
 
