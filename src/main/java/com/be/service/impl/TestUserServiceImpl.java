@@ -7,7 +7,7 @@ import com.be.repository.TestRepository;
 import com.be.repository.TestUserRepository;
 import com.be.repository.UserRepository;
 import com.be.service.TestUserService;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
